@@ -1,0 +1,8 @@
+- Model : Implement Bayes by backprop training
+- BayesianLayer : Create a suitable prior for weights and biases as an instance of ParameterDistribution
+- BayesianLayer : Create a suitable variational posterior for weights as an instance of ParameterDistribution
+- BayesianLayer : As for the weights, create the bias variational posterior instance here
+- BayesianLayer : Perform a forward pass as described in this method's docstring
+- BayesNet : Perform a full pass through your BayesNet as described in this method's docstring DONE
+- UnivariateGaussian : log_likelihood + sample DONE
+- MultivariateDiagonalGaussian : log_likelihood + sample DONE

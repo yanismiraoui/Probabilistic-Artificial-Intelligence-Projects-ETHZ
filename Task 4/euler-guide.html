@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>euler-guide</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="how-to-run-task-4-on-euler">How to run task 4 on Euler</h1>
+<p>This guide describes how you can run task 4 on the ETH Euler cluster. Please only follow this approach if you are unable to run the task on your local machine, e.g., if you own an M1 MacBook or have very old hardware. All the tasks are designed so that they can be completed on a personal laptop, including if you are trying to obtain a competitive leaderboard score. Almost all students will have a strictly smoother experience working with Docker on their own laptop rather than following this guide.</p>
+<p><strong>Read the “Important information” section very carefully before you start with this guide. Failure to do so may result in loss of cluster access and/or termination of your ETH account!</strong></p>
+<p>Note that you can adapt this guide to run the tasks on other systems, such as Google Colab. However, we can not provide any additional guidance or support for other approaches.</p>
+<h2 id="important-information">Important information</h2>
+<ol type="1">
+<li><strong>Never</strong> perform <strong>any computations</strong> on Euler directly; <strong>always use the batch system (bsub)</strong>! If you run your solution or other heavy computation directly, you will lose access to the cluster (possibly forever).</li>
+<li>Please use this approach only as a last resort to not overload the cluster.</li>
+<li>This is an unofficial approach, hence we can only provide very limited support to you.</li>
+<li>The <a href="https://scicomp.ethz.ch/wiki/Main_Page">ETH Scientific and High Performance Computing Wiki</a> provides very detailed documentation for everything related to the cluster, as well as a detailed <a href="https://scicomp.ethz.ch/wiki/FAQ">FAQ</a>. Whenever you have cluster-related questions, please search the wiki first. We will not answer questions that are already answered in the wiki.</li>
+<li>Your final code that you hand-in should still run via Docker. If you only change <em>solution.py</em> and do not use any hard-coded file paths, then the Docker-approach should still work. Nevertheless, please test your code with Docker before submitting it.</li>
+</ol>
+<h2 id="initial-one-time-setup">Initial one-time setup</h2>
+<p>The following steps prepare the cluster for running the tasks. You need to do those steps only once for the entire course.</p>
+<ol type="1">
+<li>Read <em>and understand</em> the documentation of the cluster and the rules for using it:
+<ol type="1">
+<li>Read <a href="https://scicomp.ethz.ch/wiki/Accessing_the_cluster">Accessing the cluster</a> and follow the instructions to gain access to the Euler cluster.</li>
+<li>Read the <a href="https://scicomp.ethz.ch/wiki/Getting_started_with_clusters">Getting started with clusters</a> tutorial, in particular sections 2, 3, and 5.</li>
+<li>Revisit the <a href="https://rechtssammlung.sp.ethz.ch/Dokumente/203.21en.pdf">ETH Zurich Acceptable Use Policy for Information and Communications Technology (“BOT”)</a>.</li>
+</ol></li>
+<li>Connect to the cluster and change into your home directory (<code>cd ~</code>) if necessary.</li>
+<li>Download and install <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> (our Python distribution):
+<ol type="1">
+<li>Run <code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</code>.</li>
+<li>Run <code>chmod +x Miniconda3-latest-Linux-x86_64.sh</code>.</li>
+<li>Run <code>./Miniconda3-latest-Linux-x86_64.sh</code>.</li>
+<li>Review and accept the license agreement.</li>
+<li>Make sure the installation location is <code>/cluster/home/USERNAME/miniconda3</code> where <code>USERNAME</code> is your ETH username and press <em>ENTER</em> to confirm the location.</li>
+<li>When asked whether you wish the installer to initialize Miniconda3, answer <code>yes</code>.</li>
+<li>Disconnect and reconnect to the cluster.</li>
+<li>Run <code>conda config --set auto_activate_base false</code>.</li>
+<li>Run <code>rm Miniconda3-latest-Linux-x86_64.sh</code> to remove the installer.</li>
+</ol></li>
+</ol>
+<h2 id="per-task-setup">Per-task setup</h2>
+<p>You need to perform the following steps only once for task 4, but again for future tasks.</p>
+<p><strong>Note: In comparison to previous tasks, this task requires additional steps.</strong> Please follow the guide below carefully.</p>
+<ol type="1">
+<li>Upload the extracted handout to the cluster and store it as <em>~/task4/</em>. Your <em>solution.py</em> file should be stored as <em>~/task4/solution.py</em>.</li>
+<li>Connect to the cluster and change into the task directory by running <code>cd ~/task4/</code>.</li>
+<li>Create the task’s Python environment:
+<ol type="1">
+<li>Run <code>conda deactivate</code> to make sure that you are starting from a clean state.</li>
+<li>Run <code>conda create -n pai-task4 python=3.8.*</code> and confirm the prompts with <em>y</em>.</li>
+<li>Run <code>conda install -n pai-task4 -c anaconda pyopengl=3.1.*</code> and confirm the prompts with <em>y</em>.</li>
+<li>Run <code>conda activate pai-task4</code>.</li>
+<li>Run <code>python --version</code> and make sure that your Python version starts with <em>3.8</em>.</li>
+<li>Run <code>pip install -U pip &amp;&amp; pip install -r requirements.txt</code></li>
+<li>Whenever you change <em>requirements.txt</em>, do the following:
+<ol type="1">
+<li>Always run <code>conda activate pai-task4</code> and make sure the environment is activated <em>before</em> running any <code>pip</code> commands!</li>
+<li>If you added a new package, you need to re-run <code>pip install -U pip &amp;&amp; pip install -r requirements.txt</code>.</li>
+<li>If you removed a package, you need to run <code>pip uninstall PACKAGE</code> where <code>PACKAGE</code> is the package name.</li>
+</ol></li>
+</ol></li>
+<li>After finishing task 4 you can free some space by removing the environment via <code>conda env remove -n pai-task4</code>.</li>
+</ol>
+<h2 id="running-your-code">Running your code</h2>
+<p>You need to perform the following steps each time you reconnect to the cluster and want to run your solution.</p>
+<p><strong>Only run your solution via the batch system, and never directly! If you run your solution directly, you will lose access to the cluster now and in the future!</strong></p>
+<p><strong>Note: In comparison to previous tasks, this task requires additional steps.</strong> Please follow the guide below carefully.</p>
+<ol type="1">
+<li>Preparation:
+<ol type="1">
+<li>Connect to the cluster and change into the task directory by running <code>cd ~/task4/</code>.</li>
+<li>Run <code>conda activate pai-task4</code>.</li>
+<li>Load required modules by running <code>module load ffmpeg/3.2.14 mesa/18.3.6</code></li>
+</ol></li>
+<li>Submit a batch job:
+<ol type="1">
+<li><p>Run</p>
+<pre><code> bsub -o &quot;$(pwd)/logs.txt&quot; -n 4 -R &quot;rusage[mem=2048]&quot; xvfb-run -s &quot;-screen 0 1400x900x24&quot; python -u checker_client.py --results-dir &quot;$(pwd)&quot;</code></pre></li>
+<li><p>Do <strong>not</strong> modify any files in the <em>~/task4/</em> directory until the batch job has completed. The cluster uses your code at the time of <em>execution</em>, not at the time of <em>submission</em>!</p></li>
+<li><p>You can inspect the state of your batch job by running <code>bbjobs</code>.</p></li>
+<li><p>After your job starts, you can determine its job ID via <code>bbjobs</code> and then watch it in real-time using <code>bpeek -f jobID</code> where your replace <code>jobID</code> with the job’s ID.</p></li>
+<li><p>As soon as your job completed, you can find its output in <em>~/task4/logs.txt</em> and your submission in <em>~/task4/results_check.byte</em>. Note that the batch system appends the outputs of multiple jobs to the log file.</p></li>
+</ol></li>
+</ol>
+</body>
+</html>

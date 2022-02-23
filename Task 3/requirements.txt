@@ -1,0 +1,7 @@
+numpy==1.21.*
+scipy==1.7.*
+pyarmor==6.7.4
+cryptography==3.0
+scikit-learn==0.24.*
+Matplotlib==3.4.*
+pandas==1.3.*

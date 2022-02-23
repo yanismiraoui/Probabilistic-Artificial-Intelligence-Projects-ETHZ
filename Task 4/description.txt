@@ -1,0 +1,7 @@
+This code aims to solve Task 4 - REINFORCEMENT LEARNING. To solve this problem, we have mostly used Python and the PyTorch library. 
+
+To pass the baseline and get the best result possible, we have followed the details put in the task description and the hints put as comments in the code. 
+Firstly, we have implemented the code to complete the class MLPActorCritic's step method by sampling an action from the policy and then computing the corresponding value function and log-probability. We have then implemented the methods pi_update and v_update of the Agent class. We have tried different loss functions before finding the right one, i.e. the one that performs well. 
+Moreover, we also completed the get method in order to normalize the values obtained earlier. Finally, an important part of this task was to implement the computation of phi in the end_traj method. We acheived it by calling the discount_cumsum() function.
+
+Our best result led to a score of 222.99 on the leaderboard. 

@@ -1,0 +1,6 @@
+This code aims to solve Task 3 - BAYESIAN OPTIMIZATION. To solve this problem, we have mostly used Python and the sklearn library. 
+
+To pass the baseline and get the best result possible, we have followed the quantitative details put in the task description. 
+Firstly, we have implemented the code to complete the class BO_algo init method by initializing the necessary objective and constraint models with GaussianProcessRegressor. We have then implemented the methods next_recommendation and acquisition_function. Moreover, an important part of this task was to complete the add_data_point method. It was necessary in this method to make sure that we correctly handle the shapes of our x, z and c arrays for fitting the objective and constraint models. Finally, we completed the get_solution method to return the x_opt that minimizes the objective model but respect as well the constraint. 
+
+Our best result led to a score of 0.1574 on the leaderboard.

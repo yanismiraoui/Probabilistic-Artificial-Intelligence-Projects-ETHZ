@@ -1,0 +1,7 @@
+This code aims to solve Task 1 - GAUSSIAN PROCESS REGRESSION. To solve this problem, we have mostly used Python and the sklearn library. 
+
+To pass the baseline and get the best result possible, we have followed the challenges put in the task description. 
+Firstly, we have tried to determine the best kernel for our Gaussian Process and our data. After a lot of different tests, we have concluded that a Matern kernel would be the best kernel in our case. We have kept as comments a few kernels that we have tested at this stage.
+Moreover, we have tried to implement the Nyström method (commented in the code). The implementation of this method made our computations faster but didn't improve our results. The best results that we have gotten were when we fitted the GP with all our data and didn't used the Nyström method. This implied a longer computation time (~8 minutes) but better results.
+
+Our best result led to a cost of 5.161 on the public dataset and 5.617 on the private dataset.

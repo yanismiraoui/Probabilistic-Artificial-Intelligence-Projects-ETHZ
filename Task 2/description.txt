@@ -1,0 +1,6 @@
+This code aims to solve Task 2 - BAYESIAN NEURAL NETS. To solve this problem, we have mostly used Python and the PyTorch library. 
+
+To pass the baseline and get the best result possible, we have followed the challenges put in the task description. 
+Firstly, we have implemented the code to complete the classes UnivariateGaussian and MultivariateDiagonalGaussian with the methods log_likelihood and sample. We have then implemented the classes BayesianLayer and BayesNet to represent a BNN. In particular, in the class BayesianLayer, we have tried different weights priors and weights variational posterior. To pass the baseline, we have also implemented the class ScaleMixtureGaussian. We have used this new class as weights and biases prior. Moreover, modifying the number of epochs, the batch size and the size of the hidden layers improved our score and allowed us to pass the baseline.
+
+Our best result led to a score of 2.00120136272 on the leaderboard.
